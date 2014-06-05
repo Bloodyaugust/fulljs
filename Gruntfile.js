@@ -74,7 +74,7 @@ module.exports = function(grunt) {
                 processContent: function (content, srcpath) {
                     var instanceConfig = {
                         data: {
-                            name: 'mollyisamilf'
+                            name: 'BlueHost'
                         }
                     };
                     return grunt.template.process(content, instanceConfig);
@@ -136,10 +136,20 @@ module.exports = function(grunt) {
          }
      }
  },
+ simplemocha: {
+     options: {
+       globals: ['should'],
+       timeout: 3000,
+       ignoreLeaks: false,
+       ui: 'bdd',
+       reporter: 'tap'
+     },
+     all: { src: ['tests/*.js'] }
+},
  watch: {
     scripts: {
         files: ['src/**/*.*'],
-        tasks: ["clean:build", "jshint", "jst", "copy:spa"],
+        tasks: ["clean:build", "simplemocha:all", "jshint", "jst", "copy:spa"],
         options: {
             spawn: false,
             livereload: true
@@ -158,12 +168,13 @@ grunt.loadNpmTasks("grunt-contrib-copy");
 grunt.loadNpmTasks('grunt-contrib-clean');
 grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-template');
+grunt.loadNpmTasks('grunt-simple-mocha');
 
   // Default task(s).
   grunt.registerTask(
     "default",
     [
-    "clean:build", "jshint", "jst", "copy:spa"
+    "clean:build", "simplemocha:all", "jshint", "jst", "copy:spa"
     ]);
 
 };

@@ -5,7 +5,7 @@ define([
 		console.log(templates);
 		var Hello = Backbone.Marionette.ItemView.extend({
 			template: function(){
-				return window.JST["hello.html"]({name: 'mollyisamilf'});
+				return window.JST["hello.html"]({name: 'BlueHost'});
 			},
 			className: 'row-fluid'
 		});
